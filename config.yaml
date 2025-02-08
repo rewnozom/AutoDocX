@@ -1,0 +1,29 @@
+# config.yaml - Huvudinställningar för AutoDocX
+default_llm: lmstudio
+llm:
+  lmstudio:
+    context_tokens: 60000
+    temperature: 0.7
+    base_url: "http://localhost:1234/v1"
+  openai:
+    context_tokens: 4000
+    temperature: 0.8
+    base_url: "https://api.openai.com/v1"
+default_path: "./Workspace/"   # Standard sökväg om inget annat anges
+ignore_paths:                  # Lista på mappar att ignorera under skanning
+  - "node_modules"
+  - ".git"
+  - "venv"
+prompt_templates:
+  developer:
+    full: "Developer-Full-Prompt-Template"
+    sum: "Developer-Summary-Prompt-Template"
+    short: "Developer-Short-Prompt-Template"
+  user:
+    full: "User-Full-Prompt-Template"
+    sum: "User-Summary-Prompt-Template"
+    short: "User-Short-Prompt-Template"
+  ai:
+    full: "AI-Full-Prompt-Template"
+    sum: "AI-Summary-Prompt-Template"
+    short: "AI-Short-Prompt-Template"
