@@ -16,7 +16,7 @@ pip-delete-this-directory.txt
 # 🔹 Distribution (byggfiler & paket)
 dist/
 build/
-*.egg-info/
+AutoDocX.egg-info/
 *.tar.gz
 *.whl
 
@@ -43,11 +43,18 @@ desktop.ini
 
 # 🔹 Loggar & Debugging-filer
 logs/
+logs/*
 *.log
 *.out
 *.err
 debug.log
 nohup.out
+
+# 🔹 Ignorera innehållet i docs/ och Workspace/ men behåll mapparna
+docs/*
+!docs/.gitkeep  # Behåll docs/ genom att lägga en tom .gitkeep-fil
+Workspace/*
+!Workspace/.gitkeep  # Behåll Workspace/ genom att lägga en tom .gitkeep-fil
 
 # 🔹 Git-specifika undantag
 .git/
