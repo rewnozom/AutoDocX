@@ -6,13 +6,11 @@ Exempel:
 """
 import subprocess
 
-
 def main():
     print("Distribuerar AutoDocX...")
     # Placeholder: Lägg till distributionslogik här (t.ex. bygga distributionspaket med setup.py)
     subprocess.run(["python", "setup.py", "sdist"])
     print("Distribueringen är klar.")
-
 
 if __name__ == "__main__":
     main()

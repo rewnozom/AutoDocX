@@ -59,3 +59,15 @@ Workspace/*
 # 🔹 Git-specifika undantag
 .git/
 .gitignore
+
+# Bytekompilat
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Miljöfiler
+.env
+
+# Distribution
+dist/
+build/
