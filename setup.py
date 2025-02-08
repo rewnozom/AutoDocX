@@ -1,7 +1,28 @@
+import os
 from setuptools import setup, find_packages
+from setuptools.command.install import install
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
+
+class CustomInstallCommand(install):
+    """Custom install command för att skapa nödvändiga mappar vid installation."""
+    def run(self):
+        install.run(self)  # Kör standardinstallationen
+
+        # Skapa nödvändiga mappar om de inte finns
+        directories = [
+            "Workspace",
+            "docs/User-Docs",
+            "docs/Developer-Docs",
+            "docs/AI-Docs",
+            "logs"
+        ]
+
+        for directory in directories:
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+                print(f"[SETUP] Skapade mapp: {directory}")
 
 setup(
     name="AutoDocX",
@@ -31,5 +52,8 @@ setup(
         "console_scripts": [
             "docx=src.cli_commands.docx:main",
         ],
+    },
+    cmdclass={  # Kopplar `CustomInstallCommand` till `install`
+        "install": CustomInstallCommand,
     },
 )
