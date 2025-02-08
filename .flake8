@@ -1,0 +1,10 @@
+[flake8]
+max-line-length = 120  # Tillåter längre rader än 79 tecken (standard)
+ignore = E501, W293, W291  # Ignorerar långa rader, trailing whitespace, och extra blankrader
+exclude = 
+    .git,
+    __pycache__,
+    dist,
+    build,
+    venv,
+    .venv

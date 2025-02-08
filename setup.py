@@ -10,7 +10,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Tobias Raanaes",
-    url="https://github.com/rewnozom/AutoDocX",  # Uppdatera om repo finns
+    url="https://github.com/rewnozom/AutoDocX",
     packages=find_packages(),
     install_requires=[
         "pyyaml",
@@ -20,9 +20,10 @@ setup(
         "requests",
         "aiohttp",
     ],
-    python_requires=">=3.9",
+    python_requires=">=3.10",
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3 :: Only",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

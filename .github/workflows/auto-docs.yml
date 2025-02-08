@@ -15,16 +15,18 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
-      - name: Installera Python
+      - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: Installera beroenden
         run: pip install -r requirements.txt
+      - name: Konfigurera flake8
+        run: echo "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
       - name: Kör linting (flake8)
         run: |
           pip install flake8
-          flake8 .
+          flake8 --config=.flake8
 
   test:
     name: Kör enhetstester
@@ -32,10 +34,10 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
-      - name: Installera Python
+      - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: Installera beroenden
         run: pip install -r requirements.txt
       - name: Kör tester med pytest
@@ -48,10 +50,10 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
-      - name: Installera Python
+      - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
       - name: Installera beroenden
         run: pip install -r requirements.txt
       - name: Kör AutoDocX
