@@ -1,3 +1,4 @@
+# src/ai/__init__.py
 """
 AI package - Innehåller moduler för hantering av LLM-relaterad logik.
 Här ingår:

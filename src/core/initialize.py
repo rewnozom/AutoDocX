@@ -1,7 +1,7 @@
+# src/core/initialize.py
 import os
 from ..helpers.logger import Logger
 import yaml
-
 
 def initialize_system():
     """
@@ -22,7 +22,6 @@ def initialize_system():
         Logger.log("Laddar miljövariabler från .env...", "INFO")
         try:
             from dotenv import load_dotenv
-
             load_dotenv()
             Logger.log(".env inläst.", "SUCCESS")
         except ImportError:

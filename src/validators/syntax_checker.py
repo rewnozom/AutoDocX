@@ -1,3 +1,4 @@
+# src/validators/syntax_checker.py
 def check_syntax(file_path):
     """
     Kontrollerar syntaxen i den genererade dokumentationen.
@@ -14,14 +15,11 @@ def check_syntax(file_path):
             content = f.read()
         if not content.strip():
             return False, "Filen är tom."
-        # Placeholder: Ytterligare syntaxkontroll kan läggas till här.
         return True, "Syntax OK."
     except Exception as e:
         return False, f"Fel vid läsning: {e}"
 
-
 if __name__ == "__main__":
-    # Exempel på användning
     test_file = "docs/Developer-Docs/sample.md"  # Justera sökväg vid behov
     status, message = check_syntax(test_file)
-    print(f"Syntaxcheck för {{test_file}}: {{status}} - {{message}}")
+    print(f"Syntaxcheck för {test_file}: {status} - {message}")

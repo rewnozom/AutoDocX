@@ -1,3 +1,4 @@
+# src/utils/__init__.py
 """
 Utils package - innehåller verktygsmoduler för AutoDocX.
 Här finns bland annat:

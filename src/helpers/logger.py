@@ -1,3 +1,4 @@
+# src/helpers/logger.py
 import sys
 import time
 
@@ -19,8 +20,6 @@ class Logger:
         color = Logger.COLORS.get(level, "")
         endc = Logger.COLORS["ENDC"]
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-
-        # 🛠️ FIXAD RAD: Stänger f-string korrekt
         sys.stdout.write(f"{color}[{timestamp}] [{level}] {message}{endc}\n")
         sys.stdout.flush()
 

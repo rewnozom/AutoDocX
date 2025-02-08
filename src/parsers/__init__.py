@@ -1,3 +1,4 @@
+# src/parsers/__init__.py
 """
 Parsers package - innehåller moduler för kodanalys och parsing.
 Här ingår:

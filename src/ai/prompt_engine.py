@@ -1,3 +1,4 @@
+# src/ai/prompt_engine.py
 """
 PromptEngine - Bygger och hanterar promptmallar för AutoDocX.
 Innehåller mallar för:
@@ -10,16 +11,7 @@ Varje kategori har:
   - sum: Genererar en kortfattad sammanfattning.
   - short: Ger en ultrakort version.
   - aggregate_full/sum/short: Liknande varianter för att sammanfatta aggregerad dokumentation.
-  
------------------------------------------------------------------------------------------------
-
-    Innehåller ett fördefinierat uppsättning promptmallar för:
-      - Developer
-      - User
-      - AI-optimerad dokumentation
-    Varje kategori har flera varianter (ex. full, sum, short).
 """
-
 
 class PromptEngine:
     def __init__(self):
@@ -117,7 +109,6 @@ class PromptEngine:
             str: Den valda promptmallen.
         """
         return self.templates.get(doc_type, {}).get(variant, "")
-
 
 if __name__ == "__main__":
     engine = PromptEngine()

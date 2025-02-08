@@ -1,8 +1,7 @@
+# src/generators/doc_generator.py
 import os
-
-# Importera hjälpfunktioner och loggning (förutsätter att helpers redan existerar)
-from ..helpers import file_operations, logger
-
+from ..helpers.logger import Logger
+from ..helpers.file_operations import write_file
 
 class DocGenerator:
     """
@@ -18,9 +17,6 @@ class DocGenerator:
         Lägger till genererad dokumentation för en specifik fil.
         """
         self.documents[file_path] = doc_content
-        # Logga att dokumentation lagts till
-        from ..helpers.logger import Logger
-
         Logger.log(f"Dokumentation tillagd för: {file_path}", "SUCCESS")
 
     def generate_aggregate(self, output_path):
@@ -30,15 +26,10 @@ class DocGenerator:
         aggregated_content = ""
         for file_path, content in self.documents.items():
             aggregated_content += f"# Dokumentation för {file_path}\n\n{content}\n\n"
-        # Skriv ut den aggregerade dokumentationen
-        from ..helpers.file_operations import write_file
-
         write_file(output_path, aggregated_content)
         return aggregated_content
 
-
 if __name__ == "__main__":
-    # Exempel på användning
     generator = DocGenerator()
     generator.add_document("example.py", "Detta är en exempel dokumentation.")
     agg = generator.generate_aggregate("docs/Temp/Developer-Docs/example.md")

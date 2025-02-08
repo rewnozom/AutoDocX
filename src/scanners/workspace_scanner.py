@@ -1,5 +1,5 @@
+# src/scanners/workspace_scanner.py
 import os
-
 
 class WorkspaceScanner:
     """
@@ -16,7 +16,6 @@ class WorkspaceScanner:
         """
         file_paths = []
         for root, dirs, files in os.walk(base_path):
-            # Filtrera bort ignorerade mappar
             dirs[:] = [d for d in dirs if not self._is_ignored(os.path.join(root, d))]
             for file in files:
                 full_path = os.path.join(root, file)
@@ -31,9 +30,7 @@ class WorkspaceScanner:
                 return True
         return False
 
-
 if __name__ == "__main__":
-    # Exempelanvändning
     scanner = WorkspaceScanner(ignore_paths=["node_modules", ".git", "venv"])
     files = scanner.scan(".")
     print("Skannade filer:")

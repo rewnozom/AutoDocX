@@ -1,5 +1,5 @@
+# src/generators/formatters/json_formatter.py
 import json
-
 
 def format_json(doc_content):
     """
@@ -7,7 +7,6 @@ def format_json(doc_content):
     Placeholder: Returnerar en JSON-sträng med dokumentationen.
     """
     return json.dumps({"documentation": doc_content}, indent=2)
-
 
 if __name__ == "__main__":
     sample = "Exempel på dokumentation."

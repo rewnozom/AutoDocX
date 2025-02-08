@@ -1,9 +1,9 @@
+# src/helpers/string_utils.py
 def trim(text):
     """
     Tar bort överflödiga blanktecken i början och slutet av texten.
     """
     return text.strip()
-
 
 def to_upper(text):
     """
@@ -11,20 +11,17 @@ def to_upper(text):
     """
     return text.upper()
 
-
 def to_lower(text):
     """
     Konverterar texten till gemener.
     """
     return text.lower()
 
-
 def replace_substring(text, old, new):
     """
     Ersätter alla förekomster av 'old' med 'new' i texten.
     """
     return text.replace(old, new)
-
 
 if __name__ == "__main__":
     sample = "   Hej, världen!   "

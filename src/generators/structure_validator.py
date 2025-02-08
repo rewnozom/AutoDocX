@@ -1,3 +1,4 @@
+# src/generators/structure_validator.py
 class StructureValidator:
     """
     Validerar att den genererade dokumentationen överensstämmer med koden och följer en enhetlig struktur.
@@ -12,9 +13,7 @@ class StructureValidator:
         """
         if not doc_content or len(doc_content.strip()) == 0:
             return False, "Dokumentationen är tom."
-        # Placeholder: Ytterligare kontroller kan läggas till här.
         return True, "Dokumentationen är giltig."
-
 
 if __name__ == "__main__":
     validator = StructureValidator()

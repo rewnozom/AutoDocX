@@ -1,5 +1,5 @@
+# src/parsers/code_parser.py
 import ast
-
 
 class CodeParser:
     """
@@ -33,7 +33,6 @@ class CodeParser:
         except Exception as e:
             result["error"] = f"Fel vid läsning: {e}"
         return result
-
 
 if __name__ == "__main__":
     parser = CodeParser()

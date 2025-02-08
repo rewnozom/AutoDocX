@@ -1,3 +1,4 @@
+# src/helpers/file_operations.py
 import os
 
 def read_file(file_path):
@@ -40,8 +41,5 @@ if __name__ == "__main__":
     test_path = "temp/test_file.txt"
     write_file(test_path, "Detta är en testtext.")
     print("Läser fil:", read_file(test_path))
-    
-    # 🛠 FIXAD RAD: Stängd sträng korrekt
     append_to_file(test_path, "\nLägger till mer text.")
-    
     print("Läser fil igen:", read_file(test_path))
