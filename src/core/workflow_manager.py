@@ -2,6 +2,7 @@ from ..helpers.logger import Logger
 from .process_controller import ProcessController
 from .task_dispatcher import TaskDispatcher
 
+
 class WorkflowManager:
     def __init__(self, base_path, update=False, review=False, prompt_variant="full"):
         self.base_path = base_path
@@ -10,7 +11,7 @@ class WorkflowManager:
         self.prompt_variant = prompt_variant
         self.process_controller = ProcessController()
         self.task_dispatcher = TaskDispatcher()
-    
+
     def run(self):
         Logger.log("Workflow startar...", "INFO")
         files = self.process_controller.scan_codebase(self.base_path)

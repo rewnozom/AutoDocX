@@ -3,6 +3,7 @@ class StructureValidator:
     Validerar att den genererade dokumentationen överensstämmer med koden och följer en enhetlig struktur.
     Placeholder-implementation.
     """
+
     def validate(self, doc_content):
         """
         Utför en grundläggande validering av dokumentationen.
@@ -13,6 +14,7 @@ class StructureValidator:
             return False, "Dokumentationen är tom."
         # Placeholder: Ytterligare kontroller kan läggas till här.
         return True, "Dokumentationen är giltig."
+
 
 if __name__ == "__main__":
     validator = StructureValidator()

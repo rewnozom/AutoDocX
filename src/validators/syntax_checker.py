@@ -1,11 +1,11 @@
 def check_syntax(file_path):
     """
     Kontrollerar syntaxen i den genererade dokumentationen.
-    
+
     Placeholder-implementation:
       - Verifierar att filen existerar och inte är tom.
       - Här kan man senare integrera med ett Markdown-lintverktyg eller liknande.
-      
+
     Returnerar:
       (bool, str): Status (True om syntaxen är OK, annars False) och ett meddelande.
     """
@@ -18,6 +18,7 @@ def check_syntax(file_path):
         return True, "Syntax OK."
     except Exception as e:
         return False, f"Fel vid läsning: {e}"
+
 
 if __name__ == "__main__":
     # Exempel på användning

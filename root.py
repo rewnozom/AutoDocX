@@ -1,5 +1,5 @@
-
 import os
+
 
 def create_file(file_path, content):
     """Skapar nödvändig mappstruktur och skriver innehållet till filen."""
@@ -8,11 +8,14 @@ def create_file(file_path, content):
         f.write(content)
     print(f"[CREATED] {file_path}")
 
+
 def main():
     # --- Skapa mappen scripts/ och dess filer ---
     scripts_dir = "scripts"
     scripts_files = {
-        os.path.join(scripts_dir, "setup_env.py"): '''#!/usr/bin/env python3
+        os.path.join(
+            scripts_dir, "setup_env.py"
+        ): '''#!/usr/bin/env python3
 """
 setup_env.py - Script för att sätta upp utvecklingsmiljön för AutoDocX.
 Exempel:
@@ -30,7 +33,9 @@ def main():
 if __name__ == "__main__":
     main()
 ''',
-        os.path.join(scripts_dir, "run_tests.py"): '''#!/usr/bin/env python3
+        os.path.join(
+            scripts_dir, "run_tests.py"
+        ): '''#!/usr/bin/env python3
 """
 run_tests.py - Kör enhetstester för AutoDocX.
 """
@@ -43,7 +48,9 @@ def main():
 if __name__ == "__main__":
     main()
 ''',
-        os.path.join(scripts_dir, "deploy.py"): '''#!/usr/bin/env python3
+        os.path.join(
+            scripts_dir, "deploy.py"
+        ): '''#!/usr/bin/env python3
 """
 deploy.py - Script för att distribuera AutoDocX.
 Exempel:
@@ -59,7 +66,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-'''
+''',
     }
 
     for path, content in scripts_files.items():
@@ -67,14 +74,13 @@ if __name__ == "__main__":
 
     # --- Skapa root-filer ---
     root_files = {
-        "requirements.txt": '''# requirements.txt
+        "requirements.txt": """# requirements.txt
 pyyaml
 python-dotenv
 pytest
 flake8
-''',
-
-        "setup.py": '''from setuptools import setup, find_packages
+""",
+        "setup.py": """from setuptools import setup, find_packages
 
 setup(
     name="AutoDocX",
@@ -92,9 +98,8 @@ setup(
         ],
     },
 )
-''',
-
-        "README.md": '''# AutoDocX – Automatiserad Dokumentationsgenerator
+""",
+        "README.md": """# AutoDocX – Automatiserad Dokumentationsgenerator
 
 AutoDocX är ett fullständigt automatiserat verktyg för att generera dokumentation för din kodbas. 
 Verktyget skannar igenom alla mappar och filer i angiven sökväg (standard: ./Workspace/) och genererar tre typer av dokumentation:
@@ -130,9 +135,8 @@ AutoDocX använder LM Studio (lokal LLM) som primär leverantör.
 Stöd för alternativa LLM-leverantörer finns i `model/llm_models.py`.
 
 Happy documenting!
-''',
-
-        ".gitignore": '''# .gitignore
+""",
+        ".gitignore": """# .gitignore
 
 # Bytekompilat
 __pycache__/
@@ -145,16 +149,14 @@ __pycache__/
 # Distribution
 dist/
 build/
-''',
-
-        ".env": '''# .env
+""",
+        ".env": """# .env
 # Exempel på miljövariabler för AutoDocX
 ANTHROPIC_API_KEY=din_anthropic_api_key
 OPENAI_API_KEY=din_openai_api_key
 # Lägg till övriga API-nycklar och miljövariabler här.
-''',
-
-        "config.yaml": '''# config.yaml - Huvudinställningar för AutoDocX
+""",
+        "config.yaml": """# config.yaml - Huvudinställningar för AutoDocX
 default_llm: lmstudio
 llm:
   lmstudio:
@@ -183,11 +185,12 @@ prompt_templates:
     full: "AI-Full-Prompt-Template"
     sum: "AI-Summary-Prompt-Template"
     short: "AI-Short-Prompt-Template"
-'''
+""",
     }
 
     for path, content in root_files.items():
         create_file(path, content)
+
 
 if __name__ == "__main__":
     main()

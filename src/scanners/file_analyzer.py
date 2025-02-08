@@ -1,18 +1,25 @@
 import os
 import ast
 
+
 class FileAnalyzer:
     """
-    Analyserar enskilda filer för att extrahera funktioner, klasser, kommentarer 
+    Analyserar enskilda filer för att extrahera funktioner, klasser, kommentarer
     och annan metadata. Detta är en placeholder-implementation för Python-filer.
     För icke-Python-filer returneras filens råa innehåll.
     """
+
     def analyze(self, file_path):
         """
         Analyserar filen och returnerar ett dictionary med resultat.
         Om filen är en Python-fil, används ast för att extrahera funktioner och klasser.
         """
-        analysis = {"file_path": file_path, "functions": [], "classes": [], "comments": []}
+        analysis = {
+            "file_path": file_path,
+            "functions": [],
+            "classes": [],
+            "comments": [],
+        }
         if file_path.endswith(".py"):
             try:
                 with open(file_path, "r", encoding="utf-8") as f:
@@ -36,7 +43,7 @@ class FileAnalyzer:
             except Exception as e:
                 analysis["error"] = str(e)
         return analysis
-    
+
     def _extract_comments(self, content):
         """
         En placeholder-metod för att extrahera kommentarer ur Python-kod.
@@ -47,6 +54,7 @@ class FileAnalyzer:
             if line.startswith("#"):
                 comments.append(line)
         return comments
+
 
 if __name__ == "__main__":
     analyzer = FileAnalyzer()

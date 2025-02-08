@@ -1,12 +1,14 @@
 import re
 
+
 class CommentExtractor:
     """
     Extraherar kommentarer från kod.
-    
+
     För Python-filer letar denna implementation efter rader som börjar med '#'.
     Kan utvidgas med stöd för andra språk och kommentarformat.
     """
+
     def extract_comments(self, file_path):
         """
         Läser filen och returnerar en lista med kommentarer.
@@ -21,6 +23,7 @@ class CommentExtractor:
         except Exception as e:
             comments.append(f"[ERROR] Kunde inte läsa filen: {e}")
         return comments
+
 
 if __name__ == "__main__":
     extractor = CommentExtractor()

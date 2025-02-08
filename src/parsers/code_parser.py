@@ -1,16 +1,18 @@
 import ast
 
+
 class CodeParser:
     """
     Läser och tolkar kodfiler.
-    
+
     Om filen är en Python-fil används ast för att skapa ett abstrakt syntaxträd (AST).
     För andra filtyper kan man implementera andra metoder eller returnera rå text.
     """
+
     def parse(self, file_path):
         """
         Parsar en given fil och returnerar en struktur med tolkade data.
-        
+
         Returnerar ett dictionary med:
             - "ast": AST-träd för Python-filer, annars None.
             - "raw": Rå textinnehåll om filen inte är Python.
@@ -31,6 +33,7 @@ class CodeParser:
         except Exception as e:
             result["error"] = f"Fel vid läsning: {e}"
         return result
+
 
 if __name__ == "__main__":
     parser = CodeParser()

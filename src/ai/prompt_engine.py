@@ -20,8 +20,7 @@ Varje kategori har:
     Varje kategori har flera varianter (ex. full, sum, short).
 """
 
-    
-    
+
 class PromptEngine:
     def __init__(self):
         # Definierar promptmallar för varje dokumentationstyp och variant.
@@ -50,7 +49,7 @@ class PromptEngine:
                 "aggregate_short": (
                     "Ge en ultrakort översikt av den aggregerade utvecklardokumentationen, med de mest väsentliga punkterna. "
                     "Dokumentationen:\n{docs}"
-                )
+                ),
             },
             "user": {
                 "full": (
@@ -76,7 +75,7 @@ class PromptEngine:
                 "aggregate_short": (
                     "Ge en ultrakort översikt av den aggregerade användardokumentationen med de mest väsentliga punkterna. "
                     "Dokumentationen:\n{docs}"
-                )
+                ),
             },
             "ai": {
                 "full": (
@@ -102,33 +101,33 @@ class PromptEngine:
                 "aggregate_short": (
                     "Ge en extremt kort sammanfattning av den aggregerade AI-dokumentationen, med fokus på kärninnehållet. "
                     "Dokumentationen:\n{docs}"
-                )
-            }
+                ),
+            },
         }
-
 
     def get_prompt(self, doc_type, variant):
         """
         Hämtar promptmallen för en given dokumentationstyp och variant.
-        
+
         Args:
             doc_type (str): 'developer', 'user' eller 'ai'
             variant (str): Exempelvis 'full', 'sum', 'short', 'aggregate_full', 'aggregate_sum' eller 'aggregate_short'
-        
+
         Returns:
             str: Den valda promptmallen.
         """
         return self.templates.get(doc_type, {}).get(variant, "")
 
+
 if __name__ == "__main__":
     engine = PromptEngine()
-    
+
     # Exempel: Hämta och skriv ut promptar för utvecklardokumentation
     dev_full = engine.get_prompt("developer", "full")
     dev_sum = engine.get_prompt("developer", "sum")
     dev_short = engine.get_prompt("developer", "short")
     dev_agg_full = engine.get_prompt("developer", "aggregate_full")
-    
+
     print("Developer Full Prompt:\n", dev_full)
     print("\nDeveloper Summary Prompt:\n", dev_sum)
     print("\nDeveloper Short Prompt:\n", dev_short)

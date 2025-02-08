@@ -1,12 +1,15 @@
 import os
+
 # Importera hjälpfunktioner och loggning (förutsätter att helpers redan existerar)
 from ..helpers import file_operations, logger
+
 
 class DocGenerator:
     """
     Sammanställer enskilda fil-dokumentationer till en enhetlig dokumentation.
     Integrerar data från parsers, AI-svar och formaterare.
     """
+
     def __init__(self):
         self.documents = {}
 
@@ -17,6 +20,7 @@ class DocGenerator:
         self.documents[file_path] = doc_content
         # Logga att dokumentation lagts till
         from ..helpers.logger import Logger
+
         Logger.log(f"Dokumentation tillagd för: {file_path}", "SUCCESS")
 
     def generate_aggregate(self, output_path):
@@ -28,8 +32,10 @@ class DocGenerator:
             aggregated_content += f"# Dokumentation för {file_path}\n\n{content}\n\n"
         # Skriv ut den aggregerade dokumentationen
         from ..helpers.file_operations import write_file
+
         write_file(output_path, aggregated_content)
         return aggregated_content
+
 
 if __name__ == "__main__":
     # Exempel på användning

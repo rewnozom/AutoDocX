@@ -1,11 +1,13 @@
 import re
 
+
 class DependencyTracker:
     """
     Identifierar beroenden mellan moduler genom att analysera filinnehåll.
     Denna placeholder använder ett enkelt regex för att hitta Python-importsatsningar.
     """
-    IMPORT_REGEX = r'^\s*(?:import|from)\s+([\w\.]+)'
+
+    IMPORT_REGEX = r"^\s*(?:import|from)\s+([\w\.]+)"
 
     def track(self, file_content):
         """
@@ -17,6 +19,7 @@ class DependencyTracker:
             if match:
                 dependencies.add(match.group(1))
         return list(dependencies)
+
 
 if __name__ == "__main__":
     sample_content = """

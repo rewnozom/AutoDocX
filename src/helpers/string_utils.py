@@ -4,11 +4,13 @@ def trim(text):
     """
     return text.strip()
 
+
 def to_upper(text):
     """
     Konverterar texten till versaler.
     """
     return text.upper()
+
 
 def to_lower(text):
     """
@@ -16,11 +18,13 @@ def to_lower(text):
     """
     return text.lower()
 
+
 def replace_substring(text, old, new):
     """
     Ersätter alla förekomster av 'old' med 'new' i texten.
     """
     return text.replace(old, new)
+
 
 if __name__ == "__main__":
     sample = "   Hej, världen!   "
