@@ -1,13 +1,54 @@
-# .gitignore
+# .gitignore - Ignorera oönskade filer och mappar
 
-# Bytekompilat
+# 🔹 Bytekompilat (Python)
 __pycache__/
 *.py[cod]
 *.egg-info/
 
-# Miljöfiler
+# 🔹 Miljöfiler (hemliga nycklar, API-nycklar)
 .env
+*.env
+*.venv
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Distribution
+# 🔹 Distribution (byggfiler & paket)
 dist/
 build/
+*.egg-info/
+*.tar.gz
+*.whl
+
+# 🔹 Testresultat och cache
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+__snapshots__/
+htmlcov/
+
+# 🔹 IDE-specifika filer (PyCharm, VSCode, Jupyter, etc.)
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+*.ipynb_checkpoints
+
+# 🔹 OS-specifika systemfiler
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 🔹 Loggar & Debugging-filer
+logs/
+*.log
+*.out
+*.err
+debug.log
+nohup.out
+
+# 🔹 Git-specifika undantag
+.git/
+.gitignore
