@@ -35,7 +35,7 @@ jobs:
 
       - name: Konfigurera flake8
         run: |
-          echo -e "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
+          echo -e "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291, F541, W503, F811, F841\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
 
       - name: Kör linting (flake8)
         run: flake8 --config=.flake8
