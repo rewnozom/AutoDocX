@@ -105,9 +105,7 @@ class TextGenerator:
             top_p = self.provider_config.get("top_p", 0.9)
 
             # Anropa LLM‑manager för att generera svar
-            response = await llm_manager.generate_response(
-                messages, temperature=temperature, max_tokens=max_tokens, top_p=top_p
-            )
+            response = await llm_manager.generate_response(messages)
 
             if response and response.content:
                 Logger.log(

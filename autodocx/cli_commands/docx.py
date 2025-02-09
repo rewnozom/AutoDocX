@@ -1,7 +1,29 @@
+# src/cli_commands/docx.py
+
+# src/cli_commands/docx.py
 import argparse
 from argparse import ArgumentParser
-from ..core.main import main as core_main
 import os
+import sys
+from pathlib import Path
+
+# Fix imports by adding the project root to Python path
+project_root = str(Path(__file__).resolve().parent.parent.parent)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+    
+import argparse
+from argparse import ArgumentParser
+import os
+import sys
+from pathlib import Path
+
+# Add the parent directory to path to allow direct module imports
+parent_dir = str(Path(__file__).resolve().parent.parent.parent)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+from main import main as core_main
 
 
 def main():

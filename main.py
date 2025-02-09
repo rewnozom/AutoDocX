@@ -1,9 +1,9 @@
-# src/core/main.py
+# main.py
 import argparse
-from .initialize import initialize_system
-from .workflow_manager import WorkflowManager
-from ..helpers.logger import Logger
-
+import os
+from autodocx.core.initialize import initialize_system
+from autodocx.core.workflow_manager import WorkflowManager
+from autodocx.helpers.logger import Logger
 
 def main(args=None):
     # Om inget argumentobjekt skickats med (t.ex. vid direkt anrop) görs parsing lokalt.
@@ -17,13 +17,13 @@ def main(args=None):
 
             Exempel på användning:
               - Generera fullständig dokumentation:
-                python -m src.core.main ./ --update --full
+                python main.py ./ --update --full
 
               - Generera kortfattad dokumentation:
-                python -m src.core.main ./ --update --short
+                python main.py ./ --update --short
 
               - Granska existerande dokumentation:
-                python -m src.core.main ./ --review
+                python main.py ./ --review
             """,
             formatter_class=argparse.RawTextHelpFormatter,
         )

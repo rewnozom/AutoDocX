@@ -95,15 +95,14 @@ class CustomInstallCommand(install):
                 print("[SETUP] Skapade en ny .env-fil med standardinställningar.")
 
 setup(
-    name="AutoDocX",
-    version="0.2.6",
+    name="rewnozom-autodocx",
+    version="0.2.61",
     description="Automatiserad Dokumentationsgenerator",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Tobias Raanaes",
     url="https://github.com/rewnozom/AutoDocX",
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(include=["autodocx", "autodocx.*"]),
     install_requires=INSTALL_REQUIRES,
     extras_require={
         "dev": DEV_REQUIRES,
@@ -117,7 +116,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "docx=src.cli_commands.docx:main",
+            "docx=cli:main",
         ],
     },
     cmdclass={
