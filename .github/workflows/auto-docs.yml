@@ -59,7 +59,6 @@ jobs:
 
       - name: Kör tester med pytest
         run: |
-          # Om inga tester samlas in returneras exit code 5, så vi låter det inte faila
           pytest --maxfail=1 --disable-warnings -q || [ $? -eq 5 ] && echo "Inga tester hittades" || exit 1
 
   generate-docs:
@@ -80,9 +79,14 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Skapa .env för CI
+        run: |
+          echo "DEFAULT_MODEL=simulate" > .env
+          echo "DEFAULT_PATH=./" >> .env
+          echo "IGNORE_PATHS=node_modules,.git,venv" >> .env
+
       - name: Kör AutoDocX
         run: |
-          # Använd ett positionellt argument för sökvägen istället för --path
           python -m src.core.main ./ --update --full
 
       - name: Commit & Push dokumentation

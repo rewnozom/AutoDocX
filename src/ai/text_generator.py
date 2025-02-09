@@ -8,7 +8,7 @@ from ..model.llm_models import llm_manager, ModelProvider
 class TextGenerator:
     """
     Skickar filinnehåll tillsammans med en prompt till vald LLM för att generera en sammanfattning.
-    Stödjer dynamiskt alla konfigurerade LLM providers.
+    Stödjer dynamiskt alla konfigurerade LLM providers, inklusive en simulerad provider för CI/CD.
     """
 
     def __init__(self, provider=None):
@@ -24,6 +24,11 @@ class TextGenerator:
 
         # Använd angiven provider eller default från konfigurationen
         self.provider = provider or self.config.get("default_llm")
+
+        # Om vi är i simulate-läge, använd simulerad implementation
+        if self.provider == "simulate":
+            Logger.log("Använder simulerad LLM provider för CI/CD", "INFO")
+            return
 
         try:
             # Mappa provider-namn till (modellnamn, ModelProvider)
@@ -53,7 +58,17 @@ class TextGenerator:
     async def generate_text(self, prompt):
         """
         Asynkront skickar prompten till vald LLM och returnerar svaret.
+        Om i simulate-läge, returnera simulerat svar.
         """
+        # Om vi är i simulate-läge
+        if self.provider == "simulate":
+            Logger.log("Skickar prompt till simulerad LLM...", "INFO")
+            await asyncio.sleep(1)  # Simulerar svarstid
+            simulated_response = f"Simulerad dokumentation för: {prompt[:100]}..."
+            Logger.log("Svar mottaget från simulerad LLM.", "SUCCESS")
+            return simulated_response
+
+        # Annars, använd riktig LLM
         try:
             Logger.log(f"Skickar prompt till {self.provider.upper()}...", "INFO")
 
@@ -128,9 +143,17 @@ class TextGenerator:
 
 
 if __name__ == "__main__":
-
     async def test():
-        # Testa med explicit provider "lmstudio" (som standard)
+        # Test med simulerad provider
+        try:
+            generator = TextGenerator("simulate")
+            prompt = "Exempelprompt för att generera dokumentation."
+            response = await generator.generate_text(prompt)
+            print("\nSimulerat svar:", response)
+        except Exception as e:
+            print("Fel vid simulerat test:", str(e))
+
+        # Test med explicit provider "lmstudio"
         try:
             generator = TextGenerator("lmstudio")
             prompt = "Exempelprompt för att generera dokumentation."
