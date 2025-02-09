@@ -15,18 +15,30 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
+
       - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      - name: Installera beroenden
-        run: pip install -r requirements.txt
-      - name: Konfigurera flake8
-        run: echo "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
-      - name: Kör linting (flake8)
+
+      - name: Installera beroenden och formateringsverktyg
         run: |
-          pip install flake8
-          flake8 --config=.flake8
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install autoflake isort black flake8
+
+      - name: Auto-fixa imports och formatering
+        run: |
+          autoflake --in-place --remove-unused-variables --remove-all-unused-imports --recursive .
+          isort .
+          black .
+
+      - name: Konfigurera flake8
+        run: |
+          echo "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
+
+      - name: Kör linting (flake8)
+        run: flake8 --config=.flake8
 
   test:
     name: Kör enhetstester
@@ -34,12 +46,17 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
+
       - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
       - name: Installera beroenden
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Kör tester med pytest
         run: pytest --maxfail=1 --disable-warnings -q
 
@@ -50,16 +67,22 @@ jobs:
     steps:
       - name: Check out koden
         uses: actions/checkout@v3
+
       - name: Installera Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+
       - name: Installera beroenden
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Kör AutoDocX
         run: |
-          # Kör dokumentationsgenerering med full prompt (exempel)
-          python -m src.core.main --path="./" --update --full
+          # Använd ett positionellt argument för sökvägen
+          python -m src.core.main ./ --update --full
+
       - name: Commit & Push dokumentation
         if: success()
         run: |
@@ -68,4 +91,3 @@ jobs:
           git add docs/
           git commit -m "AutoDocX: Uppdaterad dokumentation" || echo "Inga ändringar att committa"
           git push
-
