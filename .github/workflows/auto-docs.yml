@@ -88,12 +88,3 @@ jobs:
       - name: Kör AutoDocX
         run: |
           python -m src.core.main ./ --update --full
-
-      - name: Commit & Push dokumentation
-        if: success()
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add docs/
-          git commit -m "AutoDocX: Uppdaterad dokumentation" || echo "Inga ändringar att committa"
-          git push
