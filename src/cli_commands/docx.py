@@ -1,4 +1,4 @@
-# src/cli_commands/docx.py
+import argparse
 from argparse import ArgumentParser
 from ..core.main import main as core_main
 import os
@@ -11,6 +11,18 @@ def main():
         ---------------------------------------------------
         Använd detta CLI-verktyg för att generera, uppdatera och granska dokumentation 
         direkt från kommandoraden.
+
+        📌 Path (sökväg):
+          - "." (punkt) = Skannar hela projektet i ./Workspace/
+          - Du kan också ange en specifik katalog, t.ex.:
+            docx "C:\\User\\ExampleProject"
+
+        📌 Exempel på användning:
+          - Skanna hela standardkatalogen:
+            docx . --update
+
+          - Skanna en specifik katalog:
+            docx "C:\\User\\ExampleProject" --update --sum
 
         Exempel på användning:
           - Uppdatera dokumentationen:
