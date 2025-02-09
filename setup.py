@@ -30,7 +30,7 @@ DEV_REQUIRES = [
     "mypy>=1.8.0",
     "types-PyYAML>=6.0.12.12",
     "types-requests>=2.31.0.20240106",
-    "types-aiohttp>=3.9.0.20240125",
+    "types-aiohttp>=3.8.0",
 ]
 
 class CustomInstallCommand(install):
