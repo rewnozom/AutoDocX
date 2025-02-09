@@ -5,3 +5,4 @@ Här ingår:
   - syntax_checker: Kontrollerar syntaxen i dokumentationen.
   - doc_consistency: Säkerställer att dokumentationen överensstämmer med koden.
 """
+

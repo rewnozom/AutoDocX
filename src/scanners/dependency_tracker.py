@@ -1,6 +1,7 @@
 # src/scanners/dependency_tracker.py
 import re
 
+
 class DependencyTracker:
     """
     Identifierar beroenden mellan moduler genom att analysera filinnehåll.
@@ -19,6 +20,7 @@ class DependencyTracker:
             if match:
                 dependencies.add(match.group(1))
         return list(dependencies)
+
 
 if __name__ == "__main__":
     sample_content = """

@@ -6,6 +6,7 @@ def format_markdown(doc_content):
     """
     return doc_content
 
+
 if __name__ == "__main__":
     sample = "Exempel på dokumentation."
     print("Markdown format:", format_markdown(sample))

@@ -4,6 +4,7 @@ from ..helpers.file_handler import FileHandler
 from ..helpers.logger import Logger
 from ..helpers.config_manager import ConfigManager
 
+
 class ProcessController:
     def __init__(self):
         config = ConfigManager().config

@@ -13,6 +13,7 @@ Varje kategori har:
   - aggregate_full/sum/short: Liknande varianter för att sammanfatta aggregerad dokumentation.
 """
 
+
 class PromptEngine:
     def __init__(self):
         # Definierar promptmallar för varje dokumentationstyp och variant.
@@ -109,6 +110,7 @@ class PromptEngine:
             str: Den valda promptmallen.
         """
         return self.templates.get(doc_type, {}).get(variant, "")
+
 
 if __name__ == "__main__":
     engine = PromptEngine()

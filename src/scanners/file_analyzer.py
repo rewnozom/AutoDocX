@@ -1,6 +1,6 @@
 # src/scanners/file_analyzer.py
-import os
 import ast
+
 
 class FileAnalyzer:
     """
@@ -51,6 +51,7 @@ class FileAnalyzer:
             if line.startswith("#"):
                 comments.append(line)
         return comments
+
 
 if __name__ == "__main__":
     analyzer = FileAnalyzer()

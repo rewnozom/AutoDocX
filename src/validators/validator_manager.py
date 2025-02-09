@@ -2,10 +2,12 @@
 from .syntax_checker import check_syntax
 from .doc_consistency import check_consistency
 
+
 class ValidatorManager:
     """
     Hanterar körning av olika validatorer på genererad dokumentation.
     """
+
     def __init__(self):
         pass
 
@@ -14,8 +16,9 @@ class ValidatorManager:
         consistency_status, consistency_msg = check_consistency(code_path, doc_path)
         return {
             "syntax": {"status": syntax_status, "message": syntax_msg},
-            "consistency": {"status": consistency_status, "message": consistency_msg}
+            "consistency": {"status": consistency_status, "message": consistency_msg},
         }
+
 
 if __name__ == "__main__":
     vm = ValidatorManager()

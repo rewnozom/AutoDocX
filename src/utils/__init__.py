@@ -6,3 +6,4 @@ Här finns bland annat:
  - ChecklistManager: Hanterar uppgifter och vilka som är klara.
  - StateManager: Övervakar systemets totala tillstånd.
 """
+

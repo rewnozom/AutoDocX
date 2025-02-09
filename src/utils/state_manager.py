@@ -22,6 +22,7 @@ class StateManager:
     def report_state(self):
         return self.state
 
+
 if __name__ == "__main__":
     state_manager = StateManager()
     state_manager.update_state("Filer processade", 10)

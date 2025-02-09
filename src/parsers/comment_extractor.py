@@ -1,6 +1,7 @@
 # src/parsers/comment_extractor.py
 import ast
 
+
 class CommentExtractor:
     """
     Extraherar kommentarer och docstrings från Python-kod.
@@ -26,6 +27,7 @@ class CommentExtractor:
         except Exception as e:
             comments.append(f"[ERROR] Kunde inte läsa filen: {e}")
         return comments
+
 
 if __name__ == "__main__":
     extractor = CommentExtractor()

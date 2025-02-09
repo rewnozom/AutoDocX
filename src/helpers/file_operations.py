@@ -1,6 +1,7 @@
 # src/helpers/file_operations.py
 import os
 
+
 def read_file(file_path):
     """
     Läser innehållet i en fil och returnerar det som en sträng.
@@ -11,6 +12,7 @@ def read_file(file_path):
     except Exception as e:
         print(f"[ERROR] Kunde inte läsa filen {file_path}: {e}")
         return None
+
 
 def write_file(file_path, content):
     """
@@ -24,6 +26,7 @@ def write_file(file_path, content):
     except Exception as e:
         print(f"[ERROR] Kunde inte skriva filen {file_path}: {e}")
 
+
 def append_to_file(file_path, content):
     """
     Appenderar innehåll till en existerande fil.
@@ -35,6 +38,7 @@ def append_to_file(file_path, content):
         print(f"[APPEND] Innehåll har lagts till i {file_path}.")
     except Exception as e:
         print(f"[ERROR] Kunde inte appenda till filen {file_path}: {e}")
+
 
 if __name__ == "__main__":
     # Testa funktionerna

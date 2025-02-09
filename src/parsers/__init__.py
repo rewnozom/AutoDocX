@@ -6,3 +6,4 @@ Här ingår:
   - comment_extractor: Extraherar kommentarer från koden.
   - metadata_parser: Samlar metadata (t.ex. filstorlek, ändringstider) för filerna.
 """
+

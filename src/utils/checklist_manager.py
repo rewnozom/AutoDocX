@@ -9,6 +9,7 @@ class ChecklistManager:
       - all_done(): Returnerar True om alla uppgifter är klara.
       - report(): Returnerar checklistans innehåll.
     """
+
     def __init__(self):
         self.checklist = {}
 
@@ -28,6 +29,7 @@ class ChecklistManager:
 
     def report(self):
         return self.checklist
+
 
 if __name__ == "__main__":
     manager = ChecklistManager()

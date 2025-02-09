@@ -1,7 +1,7 @@
 # src/generators/doc_generator.py
-import os
 from ..helpers.logger import Logger
 from ..helpers.file_operations import write_file
+
 
 class DocGenerator:
     """
@@ -28,6 +28,7 @@ class DocGenerator:
             aggregated_content += f"# Dokumentation för {file_path}\n\n{content}\n\n"
         write_file(output_path, aggregated_content)
         return aggregated_content
+
 
 if __name__ == "__main__":
     generator = DocGenerator()

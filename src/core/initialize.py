@@ -3,6 +3,7 @@ import os
 from ..helpers.logger import Logger
 import yaml
 
+
 def initialize_system():
     """
     Initierar systemet genom att ladda konfiguration, miljövariabler och verifiera att nödvändiga resurser finns.
@@ -11,7 +12,7 @@ def initialize_system():
     config_path = "config.yaml"
     if os.path.exists(config_path):
         with open(config_path, "r", encoding="utf-8") as f:
-            config = yaml.safe_load(f)
+            yaml.safe_load(f)
         Logger.log("Konfiguration inläst från config.yaml.", "SUCCESS")
     else:
         Logger.log(
@@ -22,6 +23,7 @@ def initialize_system():
         Logger.log("Laddar miljövariabler från .env...", "INFO")
         try:
             from dotenv import load_dotenv
+
             load_dotenv()
             Logger.log(".env inläst.", "SUCCESS")
         except ImportError:

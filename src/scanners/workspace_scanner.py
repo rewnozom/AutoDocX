@@ -1,6 +1,7 @@
 # src/scanners/workspace_scanner.py
 import os
 
+
 class WorkspaceScanner:
     """
     Skannar den angivna workspace-sökvägen och identifierar alla mappar och filer.
@@ -29,6 +30,7 @@ class WorkspaceScanner:
             if pattern in path:
                 return True
         return False
+
 
 if __name__ == "__main__":
     scanner = WorkspaceScanner(ignore_paths=["node_modules", ".git", "venv"])

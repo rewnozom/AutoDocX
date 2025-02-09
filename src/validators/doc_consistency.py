@@ -22,6 +22,7 @@ def check_consistency(code_path, doc_path):
     except Exception as e:
         return False, f"Fel vid jämförelse: {e}"
 
+
 if __name__ == "__main__":
     code_file = "src/sample.py"  # Justera sökväg vid behov
     doc_file = "docs/Developer-Docs/sample.md"  # Justera sökväg vid behov

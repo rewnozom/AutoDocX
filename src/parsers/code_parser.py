@@ -1,6 +1,7 @@
 # src/parsers/code_parser.py
 import ast
 
+
 class CodeParser:
     """
     Läser och tolkar kodfiler.
@@ -33,6 +34,7 @@ class CodeParser:
         except Exception as e:
             result["error"] = f"Fel vid läsning: {e}"
         return result
+
 
 if __name__ == "__main__":
     parser = CodeParser()

@@ -1,6 +1,7 @@
 # src/utils/progress_tracker.py
 import time
 
+
 class ProgressTracker:
     """
     Spårar processens framsteg.
@@ -11,6 +12,7 @@ class ProgressTracker:
         finish(task_name): Markerar uppgiften som klar.
         report(): Returnerar en sammanfattning av all progress.
     """
+
     def __init__(self):
         self.tasks = {}
 
@@ -35,6 +37,7 @@ class ProgressTracker:
 
     def report(self):
         return self.tasks
+
 
 if __name__ == "__main__":
     tracker = ProgressTracker()

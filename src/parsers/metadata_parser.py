@@ -2,6 +2,7 @@
 import os
 import time
 
+
 class MetadataParser:
     """
     Samlar metadata om en given fil.
@@ -29,6 +30,7 @@ class MetadataParser:
         except Exception as e:
             metadata["error"] = f"Fel vid hämtning av metadata: {e}"
         return metadata
+
 
 if __name__ == "__main__":
     parser = MetadataParser()

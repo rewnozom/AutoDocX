@@ -19,6 +19,7 @@ def check_syntax(file_path):
     except Exception as e:
         return False, f"Fel vid läsning: {e}"
 
+
 if __name__ == "__main__":
     test_file = "docs/Developer-Docs/sample.md"  # Justera sökväg vid behov
     status, message = check_syntax(test_file)

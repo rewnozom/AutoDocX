@@ -1,1 +1,1 @@
-# Auto-generated __init__.py file
+#!/usr/bin/env python3

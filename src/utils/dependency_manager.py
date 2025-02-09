@@ -2,10 +2,12 @@
 from ..scanners.dependency_tracker import DependencyTracker
 from ..helpers.file_operations import read_file
 
+
 class DependencyManager:
     """
     Hanterar beroendeanalys för filer.
     """
+
     def __init__(self):
         self.tracker = DependencyTracker()
 
@@ -14,6 +16,7 @@ class DependencyManager:
         if content:
             return self.tracker.track(content)
         return []
+
 
 if __name__ == "__main__":
     manager = DependencyManager()

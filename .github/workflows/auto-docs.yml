@@ -68,3 +68,4 @@ jobs:
           git add docs/
           git commit -m "AutoDocX: Uppdaterad dokumentation" || echo "Inga ändringar att committa"
           git push
+

@@ -1,23 +1,23 @@
 # src/model/llm_models.py
 
-from typing import Optional, Dict, Any, Union
+from typing import Optional, Dict, Any
 from enum import Enum
 import os
 from datetime import datetime
 from dotenv import load_dotenv
 
 from anthropic import Anthropic
-from openai import OpenAI, AzureOpenAI
-from langchain_anthropic import ChatAnthropic
-from langchain_openai import ChatOpenAI, AzureChatOpenAI
+from openai import OpenAI
 from langchain_groq import ChatGroq
 from pydantic import BaseModel, Field
 
 # Ladda miljövariabler från .env
 load_dotenv()
 
+
 class ModelProvider(Enum):
     """Supported model providers"""
+
     ANTHROPIC = "anthropic"
     OPENAI = "openai"
     AZURE = "azure"
@@ -27,6 +27,7 @@ class ModelProvider(Enum):
 
 class ModelConfig(BaseModel):
     """Model configuration settings"""
+
     provider: ModelProvider
     model_name: str
     temperature: float = Field(default=float(os.getenv("TEMPERATURE", "0.7")))
@@ -39,6 +40,7 @@ class ModelConfig(BaseModel):
 
 class ModelResponse(BaseModel):
     """Standardized model response"""
+
     content: str
     model_name: str
     total_tokens: int
@@ -50,7 +52,7 @@ class ModelResponse(BaseModel):
 
 class LLMManager:
     """Manager class for LLM operations"""
-    
+
     def __init__(self):
         """Initialize LLM Manager"""
         # 1. Ladda alla definierade modeller i en dictionary
@@ -65,7 +67,7 @@ class LLMManager:
             "anthropic": "claude-3-opus",
             "openai": "gpt-4",
             "groq": "mixtral-8x7b",
-            "azure": "gpt-4"  # Du kan justera vilken key i self.models som ska vara Azure-standard
+            "azure": "gpt-4",  # Du kan justera vilken key i self.models som ska vara Azure-standard
         }
         env_provider = os.getenv("DEFAULT_MODEL", "lmstudio").lower()
 
@@ -84,33 +86,33 @@ class LLMManager:
         return {
             "claude-3-haiku": ModelConfig(
                 provider=ModelProvider.ANTHROPIC,
-                model_name=os.getenv("CLAUDE_HAIKU_MODEL", "claude-3-haiku-20240307")
+                model_name=os.getenv("CLAUDE_HAIKU_MODEL", "claude-3-haiku-20240307"),
             ),
             "claude-3-sonnet": ModelConfig(
                 provider=ModelProvider.ANTHROPIC,
-                model_name=os.getenv("CLAUDE_SONNET_MODEL", "claude-3-sonnet-20240229")
+                model_name=os.getenv("CLAUDE_SONNET_MODEL", "claude-3-sonnet-20240229"),
             ),
             "claude-3-opus": ModelConfig(
                 provider=ModelProvider.ANTHROPIC,
-                model_name=os.getenv("CLAUDE_OPUS_MODEL", "claude-3-opus-20240229")
+                model_name=os.getenv("CLAUDE_OPUS_MODEL", "claude-3-opus-20240229"),
             ),
             "gpt-4": ModelConfig(
                 provider=ModelProvider.OPENAI,
-                model_name=os.getenv("GPT4_MODEL", "gpt-4")
+                model_name=os.getenv("GPT4_MODEL", "gpt-4"),
             ),
             "gpt-3.5-turbo": ModelConfig(
                 provider=ModelProvider.OPENAI,
-                model_name=os.getenv("GPT35_MODEL", "gpt-3.5-turbo")
+                model_name=os.getenv("GPT35_MODEL", "gpt-3.5-turbo"),
             ),
             "mixtral-8x7b": ModelConfig(
                 provider=ModelProvider.GROQ,
-                model_name=os.getenv("GROQ_MODEL", "mixtral-8x7b-32768")
+                model_name=os.getenv("GROQ_MODEL", "mixtral-8x7b-32768"),
             ),
             "lm-studio-local": ModelConfig(
                 provider=ModelProvider.LM_STUDIO,
                 model_name=os.getenv("LM_STUDIO_MODEL", "model-identifier"),
-                api_base=os.getenv("LM_STUDIO_BASE_URL", "http://localhost:1234/v1")
-            )
+                api_base=os.getenv("LM_STUDIO_BASE_URL", "http://localhost:1234/v1"),
+            ),
         }
 
     def _load_api_keys(self):
@@ -120,36 +122,36 @@ class LLMManager:
             ModelProvider.OPENAI: os.getenv("OPENAI_API_KEY"),
             ModelProvider.GROQ: os.getenv("GROQ_API_KEY"),
             ModelProvider.AZURE: os.getenv("AZURE_OPENAI_API_KEY"),
-            ModelProvider.LM_STUDIO: "lm-studio"  # LM Studio använder ev. inte API-nyckel
+            ModelProvider.LM_STUDIO: "lm-studio",  # LM Studio använder ev. inte API-nyckel
         }
 
     def _initialize_clients(self):
         """Initialize API clients for different providers"""
         self.clients = {}
-        
+
         # Anthropic
         if self.api_keys[ModelProvider.ANTHROPIC]:
             self.clients[ModelProvider.ANTHROPIC] = Anthropic(
                 api_key=self.api_keys[ModelProvider.ANTHROPIC]
             )
-        
+
         # OpenAI
         if self.api_keys[ModelProvider.OPENAI]:
             self.clients[ModelProvider.OPENAI] = OpenAI(
                 api_key=self.api_keys[ModelProvider.OPENAI]
             )
-        
+
         # Groq
         if self.api_keys[ModelProvider.GROQ]:
             self.clients[ModelProvider.GROQ] = ChatGroq(
                 api_key=self.api_keys[ModelProvider.GROQ]
             )
-        
+
         # LM Studio: i exemplet använder vi OpenAI-klienten med
         # anpassad base_url => "http://localhost:1234/v1"
         self.clients[ModelProvider.LM_STUDIO] = OpenAI(
             base_url=self.models["lm-studio-local"].api_base,
-            api_key=self.api_keys[ModelProvider.LM_STUDIO]
+            api_key=self.api_keys[ModelProvider.LM_STUDIO],
         )
 
     def add_model(self, name: str, config: ModelConfig):
@@ -167,45 +169,52 @@ class LLMManager:
         return self.models
 
     async def generate_response(
-        self,
-        messages: list,
-        model_name: Optional[str] = None,
-        **kwargs
+        self, messages: list, model_name: Optional[str] = None, **kwargs
     ) -> ModelResponse:
         """Generate response using the specified or current model"""
         start_time = datetime.now()
-        
+
         # Om model_name inte anges explicit, använd self.current_model
         model_name = model_name or self.current_model
         model_config = self.models[model_name]
-        
+
         try:
             if model_config.provider == ModelProvider.ANTHROPIC:
-                response = await self._generate_anthropic_response(messages, model_config, **kwargs)
+                response = await self._generate_anthropic_response(
+                    messages, model_config, **kwargs
+                )
             elif model_config.provider == ModelProvider.OPENAI:
-                response = await self._generate_openai_response(messages, model_config, **kwargs)
+                response = await self._generate_openai_response(
+                    messages, model_config, **kwargs
+                )
             elif model_config.provider == ModelProvider.GROQ:
-                response = await self._generate_groq_response(messages, model_config, **kwargs)
+                response = await self._generate_groq_response(
+                    messages, model_config, **kwargs
+                )
             elif model_config.provider == ModelProvider.LM_STUDIO:
-                response = await self._generate_lm_studio_response(messages, model_config, **kwargs)
+                response = await self._generate_lm_studio_response(
+                    messages, model_config, **kwargs
+                )
             else:
                 raise ValueError(f"Unsupported provider: {model_config.provider}")
 
             processing_time = (datetime.now() - start_time).total_seconds()
-            
+
             return ModelResponse(
                 content=response.content,
                 model_name=model_name,
                 total_tokens=response.usage.total_tokens,
                 prompt_tokens=response.usage.prompt_tokens,
                 completion_tokens=response.usage.completion_tokens,
-                processing_time=processing_time
+                processing_time=processing_time,
             )
 
         except Exception as e:
             raise Exception(f"Error generating response with {model_name}: {str(e)}")
 
-    async def _generate_anthropic_response(self, messages, model_config: ModelConfig, **kwargs):
+    async def _generate_anthropic_response(
+        self, messages, model_config: ModelConfig, **kwargs
+    ):
         """Generate response using Anthropic API"""
         client = self.clients[ModelProvider.ANTHROPIC]
         return await client.messages.create(
@@ -213,10 +222,12 @@ class LLMManager:
             messages=messages,
             temperature=model_config.temperature,
             max_tokens=model_config.max_tokens,
-            **kwargs
+            **kwargs,
         )
 
-    async def _generate_openai_response(self, messages, model_config: ModelConfig, **kwargs):
+    async def _generate_openai_response(
+        self, messages, model_config: ModelConfig, **kwargs
+    ):
         """Generate response using OpenAI API"""
         client = self.clients[ModelProvider.OPENAI]
         return await client.chat.completions.create(
@@ -224,10 +235,12 @@ class LLMManager:
             messages=messages,
             temperature=model_config.temperature,
             max_tokens=model_config.max_tokens,
-            **kwargs
+            **kwargs,
         )
 
-    async def _generate_groq_response(self, messages, model_config: ModelConfig, **kwargs):
+    async def _generate_groq_response(
+        self, messages, model_config: ModelConfig, **kwargs
+    ):
         """Generate response using Groq API"""
         client = self.clients[ModelProvider.GROQ]
         return await client.create(
@@ -235,10 +248,12 @@ class LLMManager:
             messages=messages,
             temperature=model_config.temperature,
             max_tokens=model_config.max_tokens,
-            **kwargs
+            **kwargs,
         )
 
-    async def _generate_lm_studio_response(self, messages, model_config: ModelConfig, **kwargs):
+    async def _generate_lm_studio_response(
+        self, messages, model_config: ModelConfig, **kwargs
+    ):
         """Generate response using LM Studio API"""
         client = self.clients[ModelProvider.LM_STUDIO]
         return await client.chat.completions.create(
@@ -246,8 +261,9 @@ class LLMManager:
             messages=messages,
             temperature=model_config.temperature,
             max_tokens=model_config.max_tokens,
-            **kwargs
+            **kwargs,
         )
+
 
 # Skapa en singleton-instans
 llm_manager = LLMManager()

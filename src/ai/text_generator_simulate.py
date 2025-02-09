@@ -4,6 +4,7 @@ from ..helpers.logger import Logger
 
 # Placeholder: Importera LLM-modellhanteraren (ex. från model/llm_models.py) när den är implementerad
 
+
 class TextGenerator:
     """
     Skickar filinnehåll tillsammans med en prompt till LLM (t.ex. LM Studio) för att generera en sammanfattning.
@@ -29,8 +30,10 @@ class TextGenerator:
         Logger.log("Svar mottaget från LLM.", "SUCCESS")
         return simulated_response
 
+
 if __name__ == "__main__":
     import asyncio
+
     generator = TextGenerator()
     prompt = "Exempelprompt för att generera dokumentation."
     response = asyncio.run(generator.generate_text(prompt))

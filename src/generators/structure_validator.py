@@ -15,6 +15,7 @@ class StructureValidator:
             return False, "Dokumentationen är tom."
         return True, "Dokumentationen är giltig."
 
+
 if __name__ == "__main__":
     validator = StructureValidator()
     valid, message = validator.validate("Test dokumentation.")
