@@ -15,14 +15,14 @@ def main():
         📌 Path (sökväg):
           - "." (punkt) = Skannar hela projektet i ./Workspace/
           - Du kan också ange en specifik katalog, t.ex.:
-            docx "C:\\User\\ExampleProject"
+            docx "C:/User/ExampleProject"
 
         📌 Exempel på användning:
           - Skanna hela standardkatalogen:
             docx . --update
 
           - Skanna en specifik katalog:
-            docx "C:\\User\\ExampleProject" --update --sum
+            docx "C:/User/ExampleProject" --update --sum
 
         Exempel på användning:
           - Uppdatera dokumentationen:
