@@ -35,7 +35,7 @@ jobs:
 
       - name: Konfigurera flake8
         run: |
-          echo "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
+          echo -e "[flake8]\nmax-line-length = 120\nignore = E501, W293, W291\nexclude = .git, __pycache__, dist, build, venv, .venv" > .flake8
 
       - name: Kör linting (flake8)
         run: flake8 --config=.flake8
@@ -58,7 +58,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Kör tester med pytest
-        run: pytest --maxfail=1 --disable-warnings -q
+        run: |
+          # Om inga tester samlas in returneras exit code 5, så vi låter det inte faila
+          pytest --maxfail=1 --disable-warnings -q || [ $? -eq 5 ] && echo "Inga tester hittades" || exit 1
 
   generate-docs:
     name: Generera dokumentation
@@ -80,7 +82,7 @@ jobs:
 
       - name: Kör AutoDocX
         run: |
-          # Använd ett positionellt argument för sökvägen
+          # Använd ett positionellt argument för sökvägen istället för --path
           python -m src.core.main ./ --update --full
 
       - name: Commit & Push dokumentation
