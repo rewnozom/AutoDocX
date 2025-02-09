@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AutoDocX"
+version = "0.2.4"
+authors = [
+    { name="Tobias Raanaes", email="your.email@example.com" },
+]
+description = "Automatiserad Dokumentationsgenerator"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pyyaml",
+    "python-dotenv",
+    "pytest",
+    "flake8",
+    "requests",
+    "aiohttp",
+    "anthropic",
+    "openai",
+    "langchain-anthropic",
+    "langchain-openai",
+    "langchain-groq",
+    "pydantic",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/rewnozom/AutoDocX"
+"Bug Tracker" = "https://github.com/rewnozom/AutoDocX/issues"
+
+[project.scripts]
+docx = "src.cli_commands.docx:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["find:"]
+
+[tool.setuptools.find]
+where = ["src"]
