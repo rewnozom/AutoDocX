@@ -16,30 +16,34 @@ Verktyget skannar igenom alla mappar och filer i angiven sökväg (standard: `./
 ## 🔹 **Vad gör AutoDocX?**
 
 **1. Automatisk skanning och analys**  
-- Går igenom varje fil i den angivna sökvägen  
-- Möjlighet att ignorera specifika mappar (se `config.yaml` för inställningar)  
-- Extraherar kod, kommentarer och metadata  
+- Går igenom varje fil i den angivna sökvägen (standard: `DEFAULT_PATH` i .env)  
+- Möjlighet att ignorera specifika mappar via `IGNORE_PATHS` i .env (standard: node_modules, .git, venv)  
+- Extraherar kod, kommentarer och metadata för komplett analys
 
-**2. Två olika typer av dokumentation**  
-- **Användardokumentation (User-Docs)** – Enkel och lättförståelig information för slutanvändare  
-- **Utvecklardokumentation (Developer-Docs)** – Teknisk och djupgående information för utvecklare  
+**2. Tre olika typer av dokumentation**  
+- **Användardokumentation (User-Docs)** – Enkel och lättförståelig information för icke-tekniska användare, fokuserar på hur man använder systemet och dess funktioner
+- **Utvecklardokumentation (Developer-Docs)** – Teknisk och djupgående dokumentation för utvecklare, innehåller kodanalys, arkitektur och implementationsdetaljer
+- **AI-Docs** – Token-optimerade sammanfattningar specifikt anpassade för LLM-chat, perfekt för AI-assistenter och automatiserad kodanalys
 
 **3. Dokumentgenereringsworkflow**  
-- **Steg 1:** Skicka filens innehåll med en Developer-prompt till LLM för att generera detaljerad dokumentation.  
-- **Steg 2:** Skicka samma fil med en User-friendly prompt för att skapa användardokumentation.  
-- **Steg 3:** Skicka samma fil med en AI-optimerad prompt för att generera en sammanfattning för LLM-chat.  
+- **Steg 1:** Skicka filens innehåll med en Developer-prompt till LLM för att generera detaljerad teknisk dokumentation
+- **Steg 2:** Skicka samma fil med en User-friendly prompt för att skapa lättförståelig användardokumentation
+- **Steg 3:** Skicka samma fil med en AI-optimerad prompt för att generera en effektiv LLM-anpassad sammanfattning
 
-Under processen sparas utdata först i `docs/Temp/`, med en mappstruktur som speglar källkoden.  
-När alla filer är klara sammanställs dokumentationen per mapp och exporteras till:  
-- `docs/User-Docs/`  
-- `docs/Developer-Docs/`  
-- `docs/AI-Docs/`  
+**4. Strukturerad output**  
+Under processen sparas all dokumentation först i `docs/Temp/` med en mappstruktur som exakt speglar källkodens struktur. När alla filer är färdigprocessade sammanställs den kompletta dokumentationen per kategori och exporteras till:
+- `docs/Developer-Docs/` – För utvecklare och teknisk personal
+- `docs/User-Docs/` – För slutanvändare och icke-teknisk personal
+- `docs/AI-Docs/` – För AI-assistenter och LLM-integrationer
 
-**4. Alltid uppdaterad**  
-- Dokumentationen uppdateras automatiskt varje gång koden ändras  
-
-**5. Passar alla typer av projekt**  
-- Kan användas oavsett storlek eller teknikstack  
+**5. Konfiguration via .env**
+- All konfiguration hanteras enkelt via miljövariabler i .env-filen
+- Stöd för flera LLM-providers:
+  - LM Studio (lokal LLM)
+  - Anthropic (Claude)
+  - OpenAI (GPT-4/3.5)
+  - Azure OpenAI
+  - Groq
 
 ---
 
