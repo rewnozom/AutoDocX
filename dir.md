@@ -1,3 +1,4 @@
+
 AutoDocX/
 │
 ├── config.yaml                      # Huvudkonfiguration (inställningar, prompt-alternativ, ignorerade mappar etc.)
