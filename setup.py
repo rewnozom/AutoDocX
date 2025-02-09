@@ -5,6 +5,33 @@ from setuptools.command.install import install
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+# Core dependencies required for the application
+INSTALL_REQUIRES = [
+    "pyyaml>=6.0.1",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "aiohttp>=3.9.1",
+    # LLM dependencies
+    "anthropic>=0.18.1",
+    "openai>=1.12.0",
+    "langchain-anthropic>=0.0.4",
+    "langchain-openai>=0.0.2",
+    "langchain-groq>=0.0.1",
+    "pydantic>=2.6.1",
+]
+
+# Development dependencies
+DEV_REQUIRES = [
+    "pytest>=7.4.0",
+    "flake8>=6.1.0",
+    "black>=23.9.1",
+    "isort>=5.12.0",
+    "autoflake>=2.2.0",
+    "mypy>=1.8.0",
+    "types-PyYAML>=6.0.12.12",
+    "types-requests>=2.31.0.20240106",
+    "types-aiohttp>=3.9.0.20240125",
+]
 
 class CustomInstallCommand(install):
     """Custom install command för att skapa nödvändiga mappar och en .env-fil om den inte finns."""
@@ -38,7 +65,7 @@ class CustomInstallCommand(install):
                     "OPENAI_API_KEY=\n"
                     "AZURE_OPENAI_API_KEY=\n"
                     "GROQ_API_KEY=\n\n"
-                    "# Vilken provider (lmstudio, anthropic, openai, azure, groq) som ska vara standard\n"
+                    "# Vilken provider som ska vara standard\n"
                     "DEFAULT_MODEL=lmstudio\n\n"
                     "# Standard-sökväg till projektets kod\n"
                     "DEFAULT_PATH=./Workspace/\n\n"
@@ -48,36 +75,25 @@ class CustomInstallCommand(install):
                     "TEMPERATURE=0.7\n"
                     "MAX_TOKENS=60000\n"
                     "TOP_P=0.9\n\n"
-                    "# Prompt-templates / mallar\n"
-                    "PROMPT_DEV_FULL=Developer-Full-Prompt-Template\n"
-                    "PROMPT_DEV_SUM=Developer-Summary-Prompt-Template\n"
-                    "PROMPT_DEV_SHORT=Developer-Short-Prompt-Template\n"
-                    "PROMPT_USER_FULL=User-Full-Prompt-Template\n"
-                    "PROMPT_USER_SUM=User-Summary-Prompt-Template\n"
-                    "PROMPT_USER_SHORT=User-Short-Prompt-Template\n"
-                    "PROMPT_AI_FULL=AI-Full-Prompt-Template\n"
-                    "PROMPT_AI_SUM=AI-Summary-Prompt-Template\n"
-                    "PROMPT_AI_SHORT=AI-Short-Prompt-Template\n\n"
                     "# LM Studio-specifika inställningar\n"
                     "LM_STUDIO_BASE_URL=http://localhost:1234/v1\n"
                     "LM_STUDIO_MODEL=model-identifier\n\n"
-                    "# Anthropic (Claude) inställningar\n"
+                    "# Anthropic inställningar\n"
                     "CLAUDE_HAIKU_MODEL=claude-3-haiku-20240307\n"
                     "CLAUDE_SONNET_MODEL=claude-3-sonnet-20240229\n"
                     "CLAUDE_OPUS_MODEL=claude-3-opus-20240229\n\n"
-                    "# OpenAI-inställningar\n"
+                    "# OpenAI inställningar\n"
                     "GPT4_MODEL=gpt-4\n"
                     "GPT35_MODEL=gpt-3.5-turbo\n\n"
-                    "# Azure OpenAI-inställningar\n"
+                    "# Azure OpenAI inställningar\n"
                     "AZURE_BASE_URL=https://your-resource.openai.azure.com\n"
                     "AZURE_API_VERSION=2024-02-15-preview\n"
                     "AZURE_GPT4_MODEL=gpt-4\n"
                     "AZURE_GPT35_MODEL=gpt-3.5-turbo\n\n"
-                    "# Groq-inställningar\n"
+                    "# Groq inställningar\n"
                     "GROQ_MODEL=mixtral-8x7b-32768\n"
                 )
                 print("[SETUP] Skapade en ny .env-fil med standardinställningar.")
-
 
 setup(
     name="AutoDocX",
@@ -89,21 +105,10 @@ setup(
     url="https://github.com/rewnozom/AutoDocX",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
-    install_requires=[
-        "pyyaml",
-        "python-dotenv",
-        "pytest",
-        "flake8",
-        "requests",
-        "aiohttp",
-        # LLM dependencies
-        "anthropic",
-        "openai",
-        "langchain-anthropic",
-        "langchain-openai",
-        "langchain-groq",
-        "pydantic",
-    ],
+    install_requires=INSTALL_REQUIRES,
+    extras_require={
+        "dev": DEV_REQUIRES,
+    },
     python_requires=">=3.10",
     classifiers=[
         "Programming Language :: Python :: 3.10",
