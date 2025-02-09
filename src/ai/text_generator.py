@@ -2,7 +2,7 @@
 import asyncio
 from ..helpers.logger import Logger
 from ..helpers.config_manager import ConfigManager
-from model.llm_models import llm_manager, ModelProvider
+from ..model.llm_models import llm_manager, ModelProvider
 
 
 class TextGenerator:
